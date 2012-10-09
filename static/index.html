@@ -9,11 +9,19 @@
         <script type="text/javascript" src='js/jquery-1.8.2.min.js'></script>
         <style type="text/css">
         	.phone {
+			    -webkit-transition: 0.5s;
+			    -moz-transition:    0.5s;
+			    -ms-transition:     0.5s;
+			    -o-transition:      0.5s;
+			    transition:         0.5s;
+
 				border: 3px solid black;
 				border-radius: 20px;
 				height: 600px;
+				position: absolute;
 				width: 360px;
-				background-color: rgba(0, 0, 0, .5);        	}
+				background-color: rgba(0, 0, 0, .5);        	
+			}
         	.phone .speaker {
 				margin: 20px auto;
 				border: 2px solid black;
@@ -23,10 +31,13 @@
         	}
         	.screen {
 				margin: auto;
+				color: white;
 				border: 2px solid black;
-				height: 480px;
+				height: 360px;
 				width: 350px;
 				background-color: rgba(0, 0, 0, .1);
+				text-align: center;
+				padding: 65px 0;
         	}
         </style>
     </head>
@@ -332,8 +343,12 @@
 			    <br/><br/><br/><br/><br/>
 			    <h6>Thanks!</h6>
 			</div>
-			<div class="step invisible" data-x="0" data-y="5000">
-				<div class="phone">
+			<div id="bump" class="step invisible" data-x="0" data-y="5000">
+				<div id="phone1" class="phone">
+					<div class="speaker"></div>
+					<div class="screen"></div>
+				</div>	
+				<div id="phone2" class="phone">
 					<div class="speaker"></div>
 					<div class="screen"></div>
 				</div>	
@@ -350,13 +365,56 @@
     	var focusList = [];
 
     	el.addEventListener("impress:stepenter", function (event) {
-    		var focus = $(event.target).attr('data-focus');
+    		var $target = $(event.target);
+
+    		var focus = $target.attr('data-focus');
     		if (focus) {
     			var $target = $('.focus[data-focus-id="' + focus + '"]');
     			if ($target[0]) {
 	    			$target.addClass('clarify');
 	    			focusList.push($target);
     			}
+    		}
+
+    		if (event.target.id === 'bump') {
+    			var $p1 = $('#phone1'),
+    				$p2 = $('#phone2'),
+    				$s1 = $p1.find('.screen'),
+    				$s2 = $p2.find('.screen');
+
+    			$p1.css('left', 0).css('top', '-280px');
+    			$p2.css('left', '540px').css('top', '-280px');
+
+    			setTimeout(function() {
+    				$p1.css('-webkit-transition', '-webkit-transform 0.5s ease-in');
+    				$p2.css('-webkit-transition', '-webkit-transform 0.5s ease-in');
+    				$p1.css('-webkit-transform', 'translate3d(88px, 0, 0)');
+    				$p2.css('-webkit-transform', 'translate3d(-88px, 0, 0)');
+	    			setTimeout(function() {
+	    				$p1.css('-webkit-transition', '-webkit-transform 0.5s ease-out');
+	    				$p2.css('-webkit-transition', '-webkit-transform 0.5s ease-out');
+	    				$p1.css('-webkit-transform', 'translate3d(0, 0, 0)');
+	    				$p2.css('-webkit-transform', 'translate3d(0, 0, 0)');
+	    				$s1.append('Accelerometer');
+	    				$s2.append('Accelerometer');
+	    				setTimeout(function() {
+		    				$s1.append('<br/>Geolocation');
+		    				$s2.append('<br/>Geolocation');
+		    				setTimeout(function() {
+			    				$s1.append('<br/>WebSockets');
+			    				$s2.append('<br/>WebSockets');
+			    				setTimeout(function() {
+				    				$s1.append('<br/>Syncronisation');
+				    				$s2.append('<br/>Syncronisation');
+				    				setTimeout(function() {
+					    				$s1.append('<br/>Syncronisation');
+					    				$s2.append('<br/>Syncronisation');
+				    				}, 1000);
+			    				}, 1000);
+		    				}, 1000);
+	    				}, 1000);
+	    			}, 500);
+    			}, 1000);
     		}
         }, false);
 
