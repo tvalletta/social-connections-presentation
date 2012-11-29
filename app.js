@@ -7,6 +7,7 @@ var app = express(),
 
 io.set('log level', 1);
 server.listen(3000);
+app.use("/", express.static(__dirname + '/static'));
 
 var unmatched = [],
     remove = [];

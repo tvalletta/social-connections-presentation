@@ -6,8 +6,16 @@
         <meta name="author" content="Thomas A. Valletta" />
         <meta name="author" content="Gabriel Dayley" />
         <link href="css/impress.css" rel="stylesheet" />
+        <link href="css/prettify.css" rel="stylesheet" />
         <script type="text/javascript" src='js/jquery-1.8.2.min.js'></script>
+        <script type="text/javascript" src='js/prettify.js'></script>
+	    <script src="/socket.io/socket.io.js"></script>
         <style type="text/css">
+        	pre.prettyprint {
+				font-family: "Courier New", Monaco, "Lucida Console", monospace;
+				font-weight: bold;
+				font-size: .75em;
+        	}
         	.phone {
 			    -webkit-transition: 0.5s;
 			    -moz-transition:    0.5s;
@@ -39,9 +47,14 @@
 				text-align: center;
 				padding: 65px 0;
         	}
+        	img {
+        		outline: 9px solid white;
+        		box-shadow: 3px 3px 13px 9px #666;
+        		margin: 9px;
+        	}
         </style>
     </head>
-    <body>
+    <body onload='prettyPrint()'>
 		<p class="fallback-message">
 		    Your browser doesn't support impress.js.  Try Chrome or Safari.
 		</p>
@@ -77,6 +90,9 @@
 			<div class="step" data-x="50" data-y="1400" data-z="-100">
 				<h4>Dungeons &amp; Dragons</h4>
 			</div>
+			<div class="step invisible" data-x="-50" data-y="1560" data-z="-300">
+				<img src="img/D&D.png"/>
+			</div>
 			<div class="step invisible" data-x="-450" data-y="1230" data-scale=".5" data-rotate-z="-90">
 				<h2 style='color: red'>Arms Length Era</h2>
 			</div>
@@ -98,6 +114,9 @@
 			<div class="step" data-x="50" data-y="2400" data-z="-100">
 				<h4>The LAN Party</h4>
 			</div>
+			<div class="step invisible" data-x="-50" data-y="2590" data-z="-300">
+				<img src="img/lan-party.jpg"/>
+			</div>
 			<div class="step invisible" data-x="-450" data-y="2130" data-scale=".5" data-rotate-z="-90">
 				<h2 style='color: red'>Direct Connect Era</h2>
 			</div>
@@ -111,6 +130,9 @@
 			<div class="step" data-x="50" data-y="3100" data-z="-100">
 				<h4>Input IP Address</h4>
 			</div>
+			<div class="step invisible" data-x="500" data-y="3100" data-z="500" data-rotate-y="-90">
+				<img src="img/ip-address.png"/>
+			</div>
 			<div class="step" data-x="50" data-y="3200" data-z="-100">
 				<h4>Input Electronic Mail Address</h4>
 			</div>
@@ -119,6 +141,9 @@
 			</div>
 			<div class="step" data-x="50" data-y="3400" data-z="-100">
 				<h4>Input Generated Code</h4>
+			</div>
+			<div class="step invisible" data-x="-50" data-y="3590" data-z="-300">
+				<img src="img/rotary-phone.jpg"/>
 			</div>
 			<div class="step invisible" data-x="-450" data-y="3130" data-scale=".5" data-rotate-z="-90">
 				<h2 style='color: red'>Input Era</h2>
@@ -136,6 +161,9 @@
 			<div class="step" data-x="50" data-y="4200" data-z="-100">
 				<h4>Webmail Screen Scrape</h4>
 			</div>
+			<div class="step invisible" data-x="500" data-y="4200" data-z="500" data-rotate-y="-90">
+				<img src="img/email-scrape.gif"/>
+			</div>
 			<div class="step" data-x="50" data-y="4300" data-z="-100">
 				<h4>Lobby</h4>
 			</div>
@@ -143,13 +171,16 @@
 				<h4>Social Network Integration</h4>
 			</div>
 			<div class="step invisible" data-x="-150" data-y="4400" data-z="300" data-rotate-y="90">
-				<h3>Facebook, Twitter, Google+, Yahoo!</h3>
+				<img src="img/facebook-logo.jpg" width="420px"/>
+				<img src="img/twitter-logo.jpg" width="420px"/>
+				<img src="img/google-plus-logo.jpg" width="420px"/>
+				<img src="img/yahoo-logo.jpg" width="420px"/>
 			</div>
 			<div class="step invisible" data-x="-250" data-y="4400" data-z="300" data-rotate-y="90">
 				<h3>Still most broadly used</h3>
 			</div>
 			<div class="step invisible" data-x="-350" data-y="4400" data-z="300" data-rotate-y="90">
-				<h3>Too much typing for mobile devices</h3>
+				<h3>Too much typing for<br/>mobile devices</h3>
 				<h6>keyboard+mouse paradigm on a mobile device</h6>
 			</div>
 			<div class="step invisible" data-x="-450" data-y="4400" data-z="300" data-rotate-y="90">
@@ -181,13 +212,15 @@
 			</div>
 			<div class="step invisible" data-x="-150" data-y="5100" data-z="300" data-rotate-y="90">
 				<h4>Colors</h4>
+				<img src="img/colors-share.jpg"/>
 			</div>
 			<div class="step invisible" data-x="-250" data-y="5100" data-z="300" data-rotate-y="90">
 				<h4>Bump</h4>
-				<h5>Demo Paypal</h5>
+				<img src="img/paypal-bump.jpg"/>
 			</div>
 			<div class="step invisible" data-x="-350" data-y="5100" data-z="300" data-rotate-y="90">
 				<h4>NFC</h4>
+				<img src="img/nfc-payment.jpg"/>
 			</div>
 			<div class="step invisible" data-x="-450" data-y="5100" data-z="300" data-rotate-y="90">
 				<video style="height:500px;" controls>
@@ -195,7 +228,13 @@
 				</video>
 			</div>
 			<div class="step invisible" data-x="-350" data-y="5100" data-z="300" data-rotate-y="90">
-				<h4>NFC</h4>
+				<h4>NFC for:</h4>
+				<ul>
+					<li>Payments</li>
+					<li>Sharing</li>
+					<li>Pairing</li>
+					<li>Config</li>
+				</ul>
 			</div>
 			<div class="step" data-x="50" data-y="5200" data-z="-100">
 				<h4>Airdrop</h4>
@@ -263,7 +302,7 @@
 					<h3>Web Bump Auth</h3>
 					<h5>AccelerometerAPI + GeolocationAPI</h5>
 				</div>
-			<div id="bump" class="step invisible" data-x="-1050" data-y="6200" data-z="300" data-rotate-y="90">
+			<div id="bump" class="step invisible" data-x="-150" data-y="6700" data-z="300" data-rotate-y="90">
 				<div id="phone1" class="phone">
 					<div class="speaker"></div>
 					<div class="screen"></div>
@@ -273,64 +312,116 @@
 					<div class="screen"></div>
 				</div>	
 			</div>
-				<div class="step invisible" data-x="-250" data-y="6200" data-z="300" data-rotate-y="90">
-					<h3>Sonar Auth</h3>
-					<h5>MicrophoneAPI + AudioAPI</h5>
-				</div>
-				<div class="step invisible" data-x="-350" data-y="6200" data-z="300" data-rotate-y="90">
-					<h3>Web NFC Auth</h3>
-					<h5>AmbientSencorAPI + Sonar Auth OR Blue</h5>
-				</div>
+			<div class="step invisible" data-x="-350" data-y="6700" data-z="300" data-rotate-y="90">
+<pre class='prettyprint lang-js'>
+window.addEventListener('devicemotion', 
+  motionHandler, false);
+
+function motionHandler(e) {
+  ...
+  var accel = e.accelerationIncludingGravity;
+  if (avg.y >= 7 &amp;&amp; std >= 2 &amp;&amp; ...) {
+    ...
+  }    
+}
+</pre>
+			</div>
+			<div class="step invisible" data-x="-550" data-y="6700" data-z="300" data-rotate-y="90">
+<pre class='prettyprint lang-js'>
+var start = +new Date();
+navigator.geolocation.getCurrentPosition(
+  function(p) {
+    socket.emit('position', {
+      pos: p,
+      elapsed: +new Date() - start
+    });
+  }
+);
+</pre>
+			</div>
+			<div class="step invisible" data-x="-750" data-y="6700" data-z="300" data-rotate-y="90">
+<pre class='prettyprint lang-js'>
+socket.on('position', function(data) {
+  // server time - (net delay + gps delay)  
+  var time = +new Date() - 
+    (avgLatency + data.elapsed);
+
+  // Check if time and location match
+  match(time, data.pos, this);
+});
+</pre>
+			</div>
+			<div class="step invisible" data-x="-950" data-y="6700" data-z="300" data-rotate-y="90">
+<pre class='prettyprint lang-js'>
+if (match) {
+  success(socket, candidate.socket);
+}
+function success(socket1, socket2) {
+  var random = Math.round(
+  	Math.random() * 10000);
+  socket1.emit("match", {id: random});
+  socket2.emit("match", {id: random});
+}
+</pre>
+			</div>
+			<div class="step invisible" data-x="-250" data-y="6200" data-z="300" data-rotate-y="90">
+				<h3>Sonar Auth</h3>
+				<h5>MicrophoneAPI + AudioAPI</h5>
+			</div>
+			<div class="step invisible" data-x="-350" data-y="6200" data-z="300" data-rotate-y="90">
+				<h3>Web NFC Auth</h3>
+				<h5>AmbientSencorAPI + Sonar Auth OR Blue</h5>
+			</div>
 			<div class="step" data-x="50" data-y="6300" data-z="-100">
 				<h4>WebAPI Proliferation</h4>
 			</div>
-				<div class="step invisible" data-x="-150" data-y="6300" data-z="300" data-rotate-y="90">
-					<h3>See Tom's other presentation</h3>
-				</div>
+			<div class="step invisible" data-x="-150" data-y="6300" data-z="300" data-rotate-y="90">
+				<h3>See Tom's other presentation</h3>
+			</div>
 			
 			<div class="step" data-x="50" data-y="6400" data-z="-100">
 				<h4>Mobile-centric UI Flow</h4>
 			</div>
-				<div class="step invisible" data-x="-150" data-y="6400" data-z="300" data-rotate-y="90">
-					<h3>Less Keyboard Input</h3>
-				</div>
-				<div class="step invisible" data-x="-250" data-y="6400" data-z="300" data-rotate-y="90">
-					<h3>Authorization will happen after Socialization</h3>
-				</div>
+			<div class="step invisible" data-x="-150" data-y="6400" data-z="300" data-rotate-y="90">
+				<h3>Less Keyboard Input</h3>
+			</div>
+			<div class="step invisible" data-x="-250" data-y="6400" data-z="300" data-rotate-y="90">
+				<h3>Authorization will happen after Socialization</h3>
+			</div>
 			<div class="step" data-x="50" data-y="6500" data-z="-100">
 				<h4>Examples</h4>
 			</div>
-				<div class="step invisible" data-x="-150" data-y="6500" data-z="300" data-rotate-y="90">
-					<h3>Carpool Finder</h3>
-					<ul style="padding-left:50px;">
-						<li>context: Location (start &amp; finish)</li>
-						<li>context: Time (start &amp; finish)</li>
-					</ul>
-				</div>
-				<div class="step invisible" data-x="-250" data-y="6500" data-z="300" data-rotate-y="90">
-					<h3>Blood Pool</h3>
-					<ul style="padding-left:50px;">
-						<li>context: Location</li>
-						<li>context: Temporal</li>
-					</ul>
-				</div>
-				<div class="step invisible" data-x="-350" data-y="6500" data-z="300" data-rotate-y="90">
-					<h3>WTF-ville</h3>
-					<ul style="padding-left:50px;">
-						<li>Leave collectables in a virtually real location</li>
-						<li>Geocaching + Gamification on steroids</li>
-						<li>context: Time &amp; Location</li>
-					</ul>
-				</div>
-				<div class="step invisible" data-x="-450" data-y="6500" data-z="300" data-rotate-y="90">
-					<h3>School Note Sharing</h3>
-					<ul style="padding-left:50px;">
-						<li>based on geolocation &amp; time, you select your class</li>
-						<li>record audio and class content</li>
-						<li>record and overlay all microphone inputs</li>
-						<li>notes</li>
-					</ul>
-				</div>
+			<div class="step invisible" data-x="-150" data-y="6500" data-z="300" data-rotate-y="90">
+				<h3>Carpool Finder</h3>
+				<ul style="padding-left:50px;">
+					<li>context: Location (start &amp; finish)</li>
+					<li>context: Time (start &amp; finish)</li>
+				</ul>
+			</div>
+			<div class="step invisible" data-x="-250" data-y="6500" data-z="300" data-rotate-y="90">
+				<h3>Blood Pool</h3>
+				<ul style="padding-left:50px;">
+					<li>context: Location</li>
+					<li>context: Temporal</li>
+				</ul>
+			</div>
+			<div class="step invisible" data-x="-350" data-y="6500" data-z="300" data-rotate-y="90">
+				<h3>WTF-ville</h3>
+				<ul style="padding-left:50px;">
+					<li>Leave collectables in a virtually real location</li>
+					<li>Geocaching + Gamification on steroids</li>
+					<li>context: Time &amp; Location</li>
+				</ul>
+			</div>
+			<div class="step invisible" data-x="-450" data-y="6500" data-z="300" data-rotate-y="90">
+				<h3>School Note Sharing</h3>
+				<ul style="padding-left:50px;">
+					<li>based on geolocation &amp; time, you select your class</li>
+					<li>record audio and class content</li>
+					<li>record and overlay all microphone inputs</li>
+					<li>notes</li>
+				</ul>
+			</div>
 			<div class="step invisible" data-x="-450" data-y="6130" data-scale=".5" data-rotate-z="-90">
 				<h2 style='color: red'>Era of Integration</h2>
 			</div>
